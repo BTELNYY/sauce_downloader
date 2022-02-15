@@ -2,9 +2,10 @@
 using System.Linq;
 using System.IO;
 using System.Net;
-using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
+#nullable disable
 namespace sauce
 {
     internal class Program
@@ -19,8 +20,35 @@ namespace sauce
             {
                 Console.Write("> ");
                 string input = Console.ReadLine();
-                DownloadImageFromUrl(input);
+                switch (input)
+                {
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Unkown command.");
+                        Console.ResetColor();
+                        break;
+                    case "code":
+                        Console.WriteLine("Enter valid code.");
+                        Console.Write("> ");
+                        string code = Console.ReadLine();
+                        DownloadImageFromUrl(code);
+                        break;
+                    case "file":
+                        string path = OpenFileDialog(".\\", "txt files (*.txt)|*.txt|All files (*.*)|*.*");
+                }
             }
+        }
+        public static void WriteError(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Error: " + message);
+            Console.ResetColor();
+        }
+        public static void WriteWarning(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Warning: " + message);
+            Console.ResetColor();
         }
         public static void DownloadImageFromUrl(string code)
         {
@@ -36,7 +64,7 @@ namespace sauce
                     bool result = Regex.IsMatch(thing, "https://t.dogehls.xyz/galleries/" + @"*");
                     if (result)
                     {
-                        if(lasturl != thing)
+                        if (lasturl != thing)
                         {
                             lasturl = thing;
                             Console.WriteLine($"Downloading {thing}");
@@ -63,6 +91,36 @@ namespace sauce
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(e.Message);
                 Console.ForegroundColor = ConsoleColor.White;
+            }
+        }
+        public static string? OpenFileDialog(string path, string fileTypes)
+        {
+            try //try to run this code, on error break and show the error.
+            {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    //sets info about our file dialog.
+                    openFileDialog.InitialDirectory = @path;
+                    openFileDialog.Filter = fileTypes; //format: "txt files (*.txt)|*.txt|All files (*.*)|*.*"
+                    openFileDialog.FilterIndex = 1; //ensure that filter is always this one.
+                    openFileDialog.RestoreDirectory = false;
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        //Get the path of specified file
+                        string filePath = openFileDialog.FileName;
+                        return filePath;
+                    }
+                    else //needed so that it can return something.
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteError(ex.Message);
+                return null;
             }
         }
     }
