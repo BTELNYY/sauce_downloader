@@ -2,3 +2,4 @@
 *.targets
 *.cache
 *.CopyComplete
+*.suo
