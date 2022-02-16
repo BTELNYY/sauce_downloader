@@ -1,0 +1,15 @@
+C:\Users\bohdan\Desktop\sauce_downloader\SauceOrLoss\bin\Debug\net6.0-windows\SauceOrLoss.exe
+C:\Users\bohdan\Desktop\sauce_downloader\SauceOrLoss\bin\Debug\net6.0-windows\SauceOrLoss.deps.json
+C:\Users\bohdan\Desktop\sauce_downloader\SauceOrLoss\bin\Debug\net6.0-windows\SauceOrLoss.runtimeconfig.json
+C:\Users\bohdan\Desktop\sauce_downloader\SauceOrLoss\bin\Debug\net6.0-windows\SauceOrLoss.dll
+C:\Users\bohdan\Desktop\sauce_downloader\SauceOrLoss\bin\Debug\net6.0-windows\ref\SauceOrLoss.dll
+C:\Users\bohdan\Desktop\sauce_downloader\SauceOrLoss\bin\Debug\net6.0-windows\SauceOrLoss.pdb
+C:\Users\bohdan\Desktop\sauce_downloader\SauceOrLoss\obj\Debug\net6.0-windows\SauceOrLoss.csproj.AssemblyReference.cache
+C:\Users\bohdan\Desktop\sauce_downloader\SauceOrLoss\obj\Debug\net6.0-windows\SauceOrLoss.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\bohdan\Desktop\sauce_downloader\SauceOrLoss\obj\Debug\net6.0-windows\SauceOrLoss.AssemblyInfoInputs.cache
+C:\Users\bohdan\Desktop\sauce_downloader\SauceOrLoss\obj\Debug\net6.0-windows\SauceOrLoss.AssemblyInfo.cs
+C:\Users\bohdan\Desktop\sauce_downloader\SauceOrLoss\obj\Debug\net6.0-windows\SauceOrLoss.csproj.CoreCompileInputs.cache
+C:\Users\bohdan\Desktop\sauce_downloader\SauceOrLoss\obj\Debug\net6.0-windows\SauceOrLoss.dll
+C:\Users\bohdan\Desktop\sauce_downloader\SauceOrLoss\obj\Debug\net6.0-windows\ref\SauceOrLoss.dll
+C:\Users\bohdan\Desktop\sauce_downloader\SauceOrLoss\obj\Debug\net6.0-windows\SauceOrLoss.pdb
+C:\Users\bohdan\Desktop\sauce_downloader\SauceOrLoss\obj\Debug\net6.0-windows\SauceOrLoss.genruntimeconfig.cache

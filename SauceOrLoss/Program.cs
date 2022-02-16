@@ -5,14 +5,21 @@ using System.Net;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 #nullable disable
 namespace sauce
 {
-    internal class Program
+    internal static class Program
     {
-        public static string version = "1.0.0";
+        public static string version = "1.1.0";
+        [STAThread]
         public static void Main()
         {
+            [DllImport("kernel32")]
+            static extern int AllocConsole();
+            [DllImport("kernel32")]
+            static extern int FreeConsole();
+            AllocConsole();
             Console.Title = "Sauce Or Loss";
             Console.WriteLine("BTELNYY's Sauce or Loss Version " + version);
             Console.WriteLine("Enter valid code.");
@@ -35,6 +42,9 @@ namespace sauce
                         break;
                     case "file":
                         string path = OpenFileDialog(".\\", "txt files (*.txt)|*.txt|All files (*.*)|*.*");
+                        Console.WriteLine($"About to parse codes. Path: {path}");
+                        ReadCodes(path);
+                        break;
                 }
             }
         }
@@ -56,7 +66,8 @@ namespace sauce
             {
                 WebClient wchtml = new WebClient();
                 string htmlString = wchtml.DownloadString("https://nhentai.to/g/" + code);
-                Directory.CreateDirectory($".\\{code}");
+                Directory.CreateDirectory(".\\" + code);
+                Thread.Sleep(100);
                 string[] things = htmlString.Split('"');
                 string lasturl = "";
                 foreach (string thing in things)
@@ -93,7 +104,7 @@ namespace sauce
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }
-        public static string? OpenFileDialog(string path, string fileTypes)
+        public static string OpenFileDialog(string path, string fileTypes)
         {
             try //try to run this code, on error break and show the error.
             {
@@ -121,6 +132,34 @@ namespace sauce
             {
                 WriteError(ex.Message);
                 return null;
+            }
+        }
+        public static void ReadCodes(string path)
+        {
+            try
+            {
+                string content = File.ReadAllText(path);
+                string[] codes = content.Split('\n');
+                Console.WriteLine("Split file into " + codes.Length + "code(s)");
+                System.Diagnostics.Stopwatch stopwatch = new();
+                System.Diagnostics.Stopwatch loopwatch = new();
+                stopwatch.Start();
+                foreach (string code in codes)
+                {
+                    string codeproccessed = code.Trim('\n');
+                    Console.WriteLine("Parsing " + codeproccessed);
+                    loopwatch.Start();
+                    DownloadImageFromUrl(codeproccessed);
+                    loopwatch.Stop();
+                    Console.WriteLine("Parsed " + codeproccessed + ", took " + loopwatch.Elapsed);
+                    loopwatch.Reset();
+                }
+                Console.WriteLine("File read finished, took " + stopwatch.Elapsed);
+                stopwatch.Stop();
+            }
+            catch(Exception ex)
+            {
+                WriteError(ex.Message);
             }
         }
     }
